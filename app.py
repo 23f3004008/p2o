@@ -19,6 +19,9 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from firecrawl import AsyncFirecrawlApp
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
 
 # Load API keys from .env
 load_dotenv()
@@ -29,6 +32,26 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 
 # --- FastAPI App Initialization ---
 app = FastAPI()
+# This middleware rewrites "/api" → "/api/" internally, without redirect
+class NormalizeApiMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        if request.url.path == "/api":
+            scope = request.scope.copy()
+            scope["path"] = "/api/"
+            new_request = Request(scope, request.receive)
+            return await call_next(new_request)
+        return await call_next(request)
+
+app.add_middleware(NormalizeApiMiddleware)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # --- Helper Functions ---
 
