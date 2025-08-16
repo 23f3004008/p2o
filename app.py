@@ -258,6 +258,7 @@ Your primary role is to generate a single, fully functional, and executable Pyth
     - If no specific format is requested, the output should be a single JSON object or an array containing the answer(s).
 5.  **JSON Output Only:** The script's final output, printed to standard output, **MUST** be a single, valid JSON object or array. Nothing else.
 6.  **No Explanations:** Do not include any explanations, comments, or markdown formatting in your response. Your entire output should be the raw Python code.
+7.  Make sure for decimals / float values go till 4 digits after the decimal
 Your goal is to create a self-contained Python script that processes the data and produces the required JSON output in the format requested.
 Make sure to answer correctly if asked which (unless mentioned) try to give the name / data point instead of the id of the data.
 GENERATE THE CORRECT PYTHON CODE TO DO THIS, DO NOT ANSWER THE QUESTIONS. If the data is given in the "Additional Context" by user use that directly, clean the data add the data and use that to answer the quetsions via python
@@ -327,7 +328,10 @@ Strictly follow these rules:
 4.  Do NOT include any explanations, apologies, comments, or markdown formatting like ```python ... ```. Just the code.
 5.  The corrected code must produce the final output in the specified JSON format.
 6.  DO NOT inculde comments in python file and keep the python file short , like no multiople empty lines just for formatting nicely
+7.  Make sure for decimals / float values go till 4 digits after the decimal
 GENERATE THE CORRECT PYTHON CODE TO DO THIS, DO NOT ANSWER THE QUESTIONS. If the data is given in the "Additional Context" by user use that directly, clean the data add the data and use that to answer the quetsions via python
+
+                                                          
 """)
     ]
     
@@ -372,7 +376,7 @@ def generate_approximate_json(questions_content: str, loop=None, request_id=None
 Based on the user's question below, generate a JSON response that provides an approximate answer.
 The code generation process failed, so we need a fallback. 
 The JSON should have the correct structure, keys, and data types as expected by the question, but the values can be approximate or placeholder data.
-
+For decimals / float values go till 4 digits after the decimal
 User Question:
 ---
 {questions_content}
@@ -392,6 +396,7 @@ The primary goal is to match the data structure (keys, data types, nesting) impl
 The actual data values can be approximate or placeholders, but they must be of the correct type.
 For example, if the user asks for a list of products with names and prices, you should return a JSON array of objects, where each object has a "name" (string) and a "price" (number).
 Your entire output must be a single, valid JSON object or array. Do not include any explanations, comments, or markdown formatting.
+For decimals / float values go till 4 digits after the decimal
 """)
         ]
     )
