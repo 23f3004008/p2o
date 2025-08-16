@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-dotenv
+google-genai
+firecrawl-py
+python-multipart
+httpx
+networkx
+requests
+urllib3
+python-dateutil
+pandas
+matplotlib
+seaborn
+beautifulsoup4
+httpx
+duckdb
