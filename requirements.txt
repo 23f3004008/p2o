@@ -15,3 +15,5 @@ seaborn
 beautifulsoup4
 httpx
 duckdb
+scikit-learn
+scipy
