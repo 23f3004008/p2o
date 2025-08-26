@@ -17,3 +17,7 @@ httpx
 duckdb
 scikit-learn
 scipy
+networkx
+contextily
+geopandas
+shapely
